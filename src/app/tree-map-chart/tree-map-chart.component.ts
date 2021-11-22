@@ -29,7 +29,8 @@ export class TreeMapChartComponent implements OnInit {
   };
 
   chartMaxWidth = 700;
-  chartWidth = window.innerWidth / 1.4;
+  chartWidth = window.innerWidth - 50;
+  // chartWidth = window.innerWidth / 1.4;
   // chartWidth = 700;
   chartHeight = 400;
 
@@ -113,5 +114,8 @@ export class TreeMapChartComponent implements OnInit {
       this.apiData = data;
       this.chartData = this.convertDataToChartData(data.groups);
     });
+    if (this.chartWidth >= this.chartMaxWidth) {
+      this.chartWidth = this.chartMaxWidth;
+    }
   }
 }

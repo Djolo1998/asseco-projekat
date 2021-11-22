@@ -139,9 +139,17 @@
                     </div>
                     <span>{{transaction["kind"]}}</span>   
                 </td>
-
+ 
                 <td>
-                    <span class="p-column-title mini-text">Category</span>
+                    <div class="hide-elem">
+                        <div class="mini-table-header"><span class="mini-text">Category</span>
+                            <div pSortableColumn='catcode' >
+                                 <p-sortIcon field="catcode"></p-sortIcon>
+                            </div></div>
+                        
+                        
+                    </div>
+                    <!-- <span class="p-column-title mini-text">Category</span> -->
                     <div *ngIf='transaction["catcode"]!=null&&transaction["splits"].length==0'>
                             {{this.getCategoryName(transaction["catcode"])}}
                     </div>
@@ -174,6 +182,12 @@
 
 
                 <!-- <td>{{transaction["amount"]}}</td> -->
+
+                <td>  
+                    <div class="hide-elem"><span class="mini-text">Direction</span> </div>
+                    <i *ngIf='transaction["direction"]=="d"'  class="pi pi-arrow-down" style="color: green"></i>   
+                    <i *ngIf='transaction["direction"]=="c"' class="pi pi-arrow-up" style="color: red"></i>   
+                </td>
 
                 <td>
                     <span class="p-column-title mini-text">Actions</span>

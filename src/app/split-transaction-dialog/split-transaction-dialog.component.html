@@ -1,10 +1,10 @@
 <div>
-    <p-dialog header="Split transaction" [(visible)]="display" [style]="{width: '50vw'}"
+    <p-dialog header="{{'splitTransactionDialog.splitTransactionLabel' | translate}}" [(visible)]="display" [style]="{width: '50vw'}"
         (onHide)="handleSplitDialogClosed()" 
         [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
         <p-card [style]="{width: '100%'}" styleClass="p-card-shadow">
 
-            <p>Please split the transaction to categories</p>
+            <p translate>splitTransactionDialog.splitTheTransaction</p>
 
 
 

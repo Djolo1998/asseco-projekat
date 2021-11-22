@@ -12,7 +12,7 @@
             categorization</p> -->
 
         <div>
-            <p-dropdown id="add-category-dropdown" [options]="categoriesOptions" placeholder="Select category" optionValue="code"
+            <p-dropdown id="add-category-dropdown" [options]="categoriesOptions" placeholder="{{'select.selectCategory'|translate}}" optionValue="code"
                 optionLabel="name" [(ngModel)]='dropdownSelectedCategory' [showClear]="true"
                 (onChange)="handleCategorySelectedChange($event)" [style]="{'width': '100%', 'margin-bottom': 
                 '15px'}">
@@ -21,7 +21,7 @@
         </div>
 
         <div>
-            <p-dropdown id="add-sub-category-dropdown" [options]="subCategoriesOptions" placeholder="Select subcategory (optional)" optionValue="code"
+            <p-dropdown id="add-sub-category-dropdown" [options]="subCategoriesOptions" placeholder="{{'select.selectSubCategory'|translate}}" optionValue="code"
                 optionLabel="name" [(ngModel)]='dropdownSelectedSubCategory' [showClear]="true"
                 [style]="{'width': '100%'}">
             </p-dropdown>

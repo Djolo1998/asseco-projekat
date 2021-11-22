@@ -13,14 +13,16 @@
         "chooseCategory": "Izaberite kategoriju",
         "selectCategory": "Izaberite kategoriju",
         "selectSubCategory": "Izaberite podkategoriju (opciono)",
-        "chooseCategoryForTransaction": "Please choose category for transaction with id: {{transactionId}}",
-        "selectedMultipleTransactions": "You have selected {{length}} transactions, for multiple categorization"
+        "chooseCategoryForTransaction": "Izaberite kategoriju za transakciju sa id: {{transactionId}}",
+        "selectedMultipleTransactions": "Izabrali ste {{length}} transakcija za kategorizaciju" 
     },
     "splitTransactionDialog": {
         "removeThisCategory": "Obrisi ovu kategoriju",
         "addNewCategory": "Dodaj novu kategoriju ",
          "amountNote":"Zbir vrednosti podeljenih transakcija mora biti jednak vrednosti transakcije",
-         "currentSum": "Trenutno nedostaje: {{sum}}"
+         "currentSum": "Trenutno nedostaje: {{sum}}", 
+        "splitTheTransaction":"Podelite transakciju po kategorijama",
+        "splitTransactionLabel":"Podelite transakciju"
     
     },
     "select": {

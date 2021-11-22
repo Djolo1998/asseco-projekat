@@ -3,7 +3,7 @@ describe('My First Test', () => {
     cy.visit('/');
     // click on add to category first transaction in table
     cy.get(
-      '#pr_id_3-table > tbody > tr:nth-child(1) > td:nth-child(7) > div > p-button:nth-child(2) > button'
+      '#pr_id_3-table > tbody > tr:nth-child(1) > td:nth-child(8) > div > p-button:nth-child(2) > button'
     ).click();
 
     //click to select from category dropdown
@@ -40,7 +40,7 @@ describe('My First Test', () => {
 
   it('A4 Split transaction', () => {
     cy.get(
-      '#pr_id_3-table > tbody > tr:nth-child(2) > td:nth-child(7) > div > p-button:nth-child(1) > button'
+      '#pr_id_3-table > tbody > tr:nth-child(2) > td:nth-child(8) > div > p-button:nth-child(1) > button'
     ).click();
 
     //click to select from category dropdown

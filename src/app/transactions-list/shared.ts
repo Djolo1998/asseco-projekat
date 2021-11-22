@@ -26,6 +26,11 @@ export let tableHeaders = [
     showInMini: false,
     sortKey: 'catcode',
   },
+  {
+    name: 'Direction',
+    fieldKey: 'direction',
+    showInMini: false,
+  },
   { name: 'Actions', showInMini: false, fieldKey: '' },
 ];
 
