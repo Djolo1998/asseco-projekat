@@ -1,0 +1,88 @@
+<div>
+    <p-dialog header="Split transaction" [(visible)]="display" [style]="{width: '50vw'}"
+        (onHide)="handleSplitDialogClosed()" 
+        [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
+        <p-card [style]="{width: '100%'}" styleClass="p-card-shadow">
+
+            <p>Please split the transaction to categories</p>
+
+
+
+            <div *ngFor="let split of splitArray; let i = index" [style]="{marginTop: '40px'}">
+
+
+                <div>
+                    <div class="inline-flex">
+                        <p translate>splitTransactionDialog.removeThisCategory</p>
+                        <p-button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded round-btn"
+                            (onClick)="deleteSplitOption(i)"></p-button>
+
+                    </div>
+                </div>
+
+                <div>
+                    <p-dropdown  id="splits-add-category-dropdown-{{i}}" [options]="categoriesOptions" placeholder="{{'select.selectCategory'|translate}}"
+                        optionValue="code" optionLabel="name" [(ngModel)]='splitArray[i].selectedCategory'
+                        [showClear]="true" (onChange)="handleCategorySelectedChange($event, i)" [style]="{'width': '100%', 'margin-bottom': 
+                        '15px'}">
+
+                    </p-dropdown>
+                </div>
+
+                <div>
+                    <p-dropdown [options]="splitArray[i].subCategoriesOptions"
+                        placeholder="{{'select.selectSubCategory'|translate}}" optionValue="code" optionLabel="name"
+                        [(ngModel)]='splitArray[i].selectedSubCategory' [showClear]="true" [style]="{'width': '100%'}">
+                    </p-dropdown>
+                </div>
+
+                <div [style]="{'marginTop': '10px'}">
+                    <p-inputNumber class="number-input" [style]="{'width': '100%'}" [(ngModel)]="splitArray[i].amount"
+                        (onInput)="handleOnInput($event)" (onBlur)="handleOnInput($event)" [max]="amountToBeEqual"
+                        mode="decimal" [minFractionDigits]="2">
+                    </p-inputNumber>
+                </div>
+
+            </div>
+
+
+            <div>
+                <div class="inline-flex">
+                    <p translate>splitTransactionDialog.addNewCategory</p>
+                    <p-button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded round-btn"
+                        (onClick)="addSplitOption()"></p-button>
+
+                </div>
+            </div>
+
+            <div *ngIf="!isAllowedToSplit"> 
+                <p class="sum-text-check" translate>splitTransactionDialog.amountNote</p>
+                <!-- <p>{{needToBeEqual}} -- </p> -->
+                <p class="sum-text-check" translate [translateParams]="{sum: needToBeEqual.toFixed(2)}">splitTransactionDialog.currentSum </p>
+            </div>
+
+
+            <!-- <div>
+                <p-dropdown [options]="categoriesOptions" placeholder="Select category" optionValue="code"
+                    optionLabel="name" [(ngModel)]='splitArray[0].selectedCategory' [showClear]="true"
+                    (onChange)="handleCategorySelectedChange($event, 0)" [style]="{'width': '100%', 'margin-bottom': 
+                    '15px'}">
+
+                </p-dropdown>
+            </div>
+
+            <div>
+                <p-dropdown [options]="subCategoriesOptions" placeholder="Select subcategory (optional)"
+                    optionValue="code" optionLabel="name" [(ngModel)]='splitArray[0].selectedSubCategory'
+                    [showClear]="true" [style]="{'width': '100%'}">
+                </p-dropdown>
+            </div> -->
+            <ng-template pTemplate="footer">
+                <p-button  label="Apply" icon="pi pi-check" [disabled]="!isAllowedToSplit"
+                    (onClick)="handleSplitApply()"></p-button>
+                <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
+                    [style]="{'margin-left': '.5em'}" (onClick)="handleSplitCancel()"></p-button>
+            </ng-template>
+        </p-card>
+    </p-dialog>
+</div>

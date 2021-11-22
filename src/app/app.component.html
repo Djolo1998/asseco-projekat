@@ -1,0 +1,22 @@
+<!-- <router-outlet></router-outlet> -->
+<p-card >
+    <div class="menu-btns">
+        <div >
+            <p-dropdown (onChange)="handleOnLanguageChange($event.value.code)" [options]="languages"
+                [(ngModel)]="selectedLanguages" optionLabel="name"></p-dropdown>
+    
+        </div>
+        <div>
+    
+            <p-dropdown (onChange)="handleThemeChange($event.value)" [options]="themes" [(ngModel)]="selectedTheme">
+            </p-dropdown>
+    
+        </div>
+    </div>
+    <div>
+        <app-transactions-list></app-transactions-list>
+
+
+    </div>
+
+</p-card>

@@ -1,0 +1,33 @@
+{
+    "demo": {
+        "greetings": "Zdravo!"
+    },
+    "transactionsList": {
+        "pleaseSelectTransactions": "Izaberite transakcije",
+        "categorizeMultipleTransaction": "Kategorizuj vise transakcija",
+        "addCategory": "Dodaj Kategoriju",
+        "showTreeMapChart": "Prikazi Tree Map chart",
+        "splitTransaction": "Podeli"
+    },
+    "addCategoryDialogComponent": {
+        "chooseCategory": "Izaberite kategoriju",
+        "selectCategory": "Izaberite kategoriju",
+        "selectSubCategory": "Izaberite podkategoriju (opciono)",
+        "chooseCategoryForTransaction": "Please choose category for transaction with id: {{transactionId}}",
+        "selectedMultipleTransactions": "You have selected {{length}} transactions, for multiple categorization"
+    },
+    "splitTransactionDialog": {
+        "removeThisCategory": "Obrisi ovu kategoriju",
+        "addNewCategory": "Dodaj novu kategoriju ",
+         "amountNote":"Zbir vrednosti podeljenih transakcija mora biti jednak vrednosti transakcije",
+         "currentSum": "Trenutno nedostaje: {{sum}}"
+    
+    },
+    "select": {
+        "selectCategory": "Izaberite kategoriju",
+        "selectSubCategory": "Izaberite podkategoriju (opciono)"
+    },
+    "charts": {
+        "showCharts": "Prikazi Grafikone"
+    }
+}

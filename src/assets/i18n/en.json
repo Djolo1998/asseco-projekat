@@ -1,0 +1,32 @@
+{
+    "demo": {
+        "greetings": "Hello!"
+    },
+    "transactionsList": {
+        "pleaseSelectTransactions": "Please select transactions",
+        "categorizeMultipleTransaction": "Categorize multiple transaction",
+        "addCategory": "Add Category",
+        "showTreeMapChart": "Show Tree Map chart",
+        "splitTransaction": "Split"
+    },
+    "addCategoryDialogComponent": {
+        "chooseCategory": "Choose category",
+        "selectCategory": "Select category",
+        "selectSubCategory": "Select subcategory (optional)",
+        "chooseCategoryForTransaction": "Please choose category for transaction with id: {{transactionId}}",
+        "selectedMultipleTransactions": "You have selected {{length}} transactions, for multiple categorization"
+    },
+    "splitTransactionDialog": {
+        "removeThisCategory": "Remove this category",
+        "addNewCategory": "Add new category ",
+        "amountNote":"Sum of amounts from split transactions must be equal to amount of original transaction",
+        "currentSum": "Current sum: {{sum}}"
+    },
+    "select": {
+        "selectCategory": "Select category",
+        "selectSubCategory": "Select subcategory (optional)"
+    },
+    "charts": {
+        "showCharts": "Show Charts"
+    }
+}

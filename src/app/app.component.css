@@ -1,0 +1,10 @@
+.menu-btns {
+  display: flex;
+  margin-bottom: 25px;
+
+  justify-content: flex-end;
+
+  gap: 25px;
+
+  padding: 20px;
+}

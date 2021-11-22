@@ -1,0 +1,197 @@
+<div>
+    <p-button (onClick)="showHideTreeMapChart()">{{'charts.showCharts'|translate}}</p-button>
+</div>
+
+<div *ngIf="showTreeMapChart">
+    <app-tree-map-chart></app-tree-map-chart>
+</div>
+
+<div>
+    <app-split-transaction-dialog *ngIf="displaySplitDialog" [display]="displaySplitDialog"
+        [transactionToSplit]="transactionToSplit" [transactions]="transactions"
+        (onCloseSplitDialogClicked)="onCloseSplitDialogClicked($event)">
+    </app-split-transaction-dialog>
+</div>
+
+
+
+<div>
+    <app-add-category-dialog *ngIf="displayDialog" [display]="displayDialog" [transactionId]="transactionIdToChage"
+        [isForMultypleTransactions]="enableMultypeSelection" [transactionsIdArray]="selectedTransactions"
+        (onHideDialogClicked)="onHideDialogClicked($event)" [transactions]="transactions" [transaction]="transaction">
+    </app-add-category-dialog>
+
+
+</div>
+
+<div class="card">
+    <div>
+        <p-button (onClick)="onCategorizeMultypleBtnClicked()" [style]="{marginTop: '30px'}">
+            <span translate>transactionsList.categorizeMultipleTransaction</span>
+        </p-button>
+
+
+        <div *ngIf="enableMultypeSelection">
+            <p [style]="{fontWeight: 600}" translate>transactionsList.pleaseSelectTransactions</p>
+            <p-button label="OK" (onClick)="handleOkMultypleTransactionDialog()" [style]="{marginRight: '20px'}">
+            </p-button>
+            <p-button label="Cancel" (onClick)="handleCancelMultypleTransactionDialog()">
+            </p-button>
+        </div>
+
+    </div>
+    <p-table [lazy]="true" [value]="transactions" [(selection)]="selectedTransactions" 
+    [totalRecords]="paginations['total-count']" [paginator]="true" [rows]="paginations['page-size']" 
+    [rowsPerPageOptions]="[10,25,50]"
+    (onLazyLoad)="handleOnLazyLoad($event)"
+    [showCurrentPageReport]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    sortMode="multiple"
+    [multiSortMeta]="multiSortMeta" 
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngIf="enableMultypeSelection">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                
+                <ng-container *ngFor="let header of tableHeaders" >
+                    
+                    <!-- <td *ngIf="header.showInMini">
+                        <span class="p-column-title mini-text">{{header.name}}</span>
+                         {{transaction[header.fieldKey]}} 
+                    </td> -->
+                    <th pSortableColumn='{{header.sortKey}}' *ngIf="header.sortKey">
+                        {{header.name}} <p-sortIcon field="{{header.sortKey}}"></p-sortIcon>
+                    </th>
+
+                    <th *ngIf="header.filterKey">
+                        <span>{{header.name}}</span>  
+
+                        <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false"  [showClearButton]="false" class="p-ml-auto kind-filter-btn"> 
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback"> 
+                                <p-dropdown [options]="kinds" [(ngModel)]="selectedKind" placeholder="Select a Kind"></p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                    </th>
+
+                    
+
+                    <th *ngIf="!header.sortKey && !header.filterKey" >
+                        <span>{{header.name}}</span>
+                    </th>
+                    
+                </ng-container>
+
+                
+                <!-- <th *ngFor="let header of tableHeaders" *ngIf="" >
+                    {{header.name}}
+                </th> -->
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-transaction >
+            <tr>
+                <td *ngIf="enableMultypeSelection">
+                    <p-tableCheckbox [value]="transaction">
+                    </p-tableCheckbox>
+                </td> 
+
+                <ng-container *ngFor="let header of tableHeaders" >
+                    
+                    <td *ngIf="header.showInMini">
+                        <div *ngIf="header.sortKey" class="hide-elem">
+                            <div class="mini-table-header">
+                                <span class="p-column-title mini-text">{{header.name}}</span>
+                                <div pSortableColumn='{{header.sortKey}}' *ngIf="header.sortKey">
+                                    <p-sortIcon field="{{header.sortKey}}"></p-sortIcon>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <span *ngIf="!header.sortKey && !header.filterKey" class="p-column-title mini-text">{{header.name}}</span>
+                                 
+                        
+                         <span>{{transaction[header.fieldKey]}}</span>  
+                    </td>
+                    
+                </ng-container>
+
+                <!-- <td *ngFor="let header of tableHeaders"  >
+                        <div *ngIf="header.showInMini">
+                        {{header.fieldKey}} -- {{transaction[header.fieldKey]}} 
+                    </div>
+                 
+                </td> -->
+
+                <!-- <td>{{transaction["id"]}} {{tableHeaders[0]["fieldKey"]}}</td> -->
+                <!-- <td> <span class="p-column-title mini-text">Beneficiary name</span> {{transaction["beneficiary-name"]}}</td> -->
+                <!-- <td>{{transaction["date"]}}</td> -->
+
+                <td>
+                    <div class="hide-elem">
+                        <span class="p-column-title mini-text">Transaction kind</span>
+                        <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false" [showClearButton]="false" class="p-ml-auto" > 
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback"> 
+                                <p-dropdown [options]="kinds" [(ngModel)]="selectedKind" placeholder="Select a Kind"></p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                    <span>{{transaction["kind"]}}</span>   
+                </td>
+
+                <td>
+                    <span class="p-column-title mini-text">Category</span>
+                    <div *ngIf='transaction["catcode"]!=null&&transaction["splits"].length==0'>
+                            {{this.getCategoryName(transaction["catcode"])}}
+                    </div>
+
+                    <div *ngIf='transaction["splits"].length>0'>{{ transaction["splits"].length }} Categories Split</div>
+
+                </td>
+
+                <!-- 
+    bitno 
+                <td *ngIf='transaction["catcode"]!=null && transaction["splits"]==null; else elseBlock'>
+                    <p-dropdown [options]="categoriesOptions" [(ngModel)]='transaction["catcode"]'
+                        placeholder="Select a Category" optionValue="code" optionLabel="name" [showClear]="true">
+                    </p-dropdown>
+                </td>
+                <ng-template #elseBlock>
+                    <td *ngIf='transaction["catcode"]==null'>
+                        <p-dropdown [options]="categoriesOptions" placeholder="Add Category" optionValue="code"
+                            optionLabel="name" [showClear]="true">
+                        </p-dropdown>
+                    </td>
+                </ng-template> -->
+
+                <!-- <td *ngIf='transaction["catcode"]==null'>Add category</td> -->
+                <!-- <td *ngIf='transaction["catcode"]!=null && transaction["splits"]==null'>
+                    {{this.getCategoryName(transaction["catcode"])}}</td> -->
+                <!-- <td *ngIf='transaction["splits"]!=null'>{{ transaction["splits"].length }} Categories Split</td>
+                 -->
+
+
+
+                <!-- <td>{{transaction["amount"]}}</td> -->
+
+                <td>
+                    <span class="p-column-title mini-text">Actions</span>
+                    <div>
+                        <p-button (onClick)="onSplitClicked(transaction)" [style]="{marginTop: '20px', marginRight: '20px'}">
+                            {{'transactionsList.splitTransaction' | translate}}
+                        </p-button>
+    
+                        <p-button (onClick)="onAddCategoryClicked(transaction)" [style]="{marginTop: '20px'}">
+                            {{'transactionsList.addCategory' | translate}}
+                        </p-button>
+                    </div>
+                </td>
+
+
+
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

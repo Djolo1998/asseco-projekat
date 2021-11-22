@@ -1,0 +1,19 @@
+.number-input {
+  width: 100%;
+}
+span {
+  width: 100%;
+}
+.inline-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.round-btn {
+  max-width: 25px;
+  max-height: 25px;
+}
+
+.sum-text-check {
+  color: red;
+}

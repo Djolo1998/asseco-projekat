@@ -1,0 +1,36 @@
+<p-dialog header="{{'addCategoryDialogComponent.chooseCategory' | translate}}" [(visible)]="display"
+    [style]="{height: '420px' }" (onHide)="handleDialogClosed()" 
+    [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
+    <p-card  styleClass="p-card-shadow">
+
+        <p *ngIf='!isForMultypleTransactions' translate [translateParams]="{transactionId: transactionId}">
+            addCategoryDialogComponent.chooseCategoryForTransaction</p>
+        <!-- <p *ngIf='!isForMultypleTransactions'>Please choose category for transaction with id: {{transactionId}}</p> -->
+        <p *ngIf='isForMultypleTransactions' translate [translateParams]="{length: transactionsIdArray.length}">
+            addCategoryDialogComponent.selectedMultipleTransactions</p>
+        <!-- <p *ngIf='isForMultypleTransactions'>You have selected {{transactionsIdArray.length}} transactions, for multyple
+            categorization</p> -->
+
+        <div>
+            <p-dropdown id="add-category-dropdown" [options]="categoriesOptions" placeholder="Select category" optionValue="code"
+                optionLabel="name" [(ngModel)]='dropdownSelectedCategory' [showClear]="true"
+                (onChange)="handleCategorySelectedChange($event)" [style]="{'width': '100%', 'margin-bottom': 
+                '15px'}">
+
+            </p-dropdown>
+        </div>
+
+        <div>
+            <p-dropdown id="add-sub-category-dropdown" [options]="subCategoriesOptions" placeholder="Select subcategory (optional)" optionValue="code"
+                optionLabel="name" [(ngModel)]='dropdownSelectedSubCategory' [showClear]="true"
+                [style]="{'width': '100%'}">
+            </p-dropdown>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button id="add-category-apply" [disabled]="!dropdownSelectedCategory" label="Apply" icon="pi pi-check"
+                (onClick)="handleApply($event)"></p-button>
+            <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
+                [style]="{'margin-left': '.5em'}" (onClick)="handleCancel($event)"></p-button>
+        </ng-template>
+    </p-card>
+</p-dialog>

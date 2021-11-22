@@ -1,0 +1,37 @@
+<div>
+    <p-dropdown [options]="charts" [(ngModel)]="currentlySelectedChart" ></p-dropdown>
+    
+</div>
+
+<div class="chart-style">
+
+    <div *ngIf="currentlySelectedChart=='bar'">
+        <ngx-charts-bar-horizontal [view]="[chartWidth,chartHeight]" [results]="chartData" [gradient]="gradient" [animations]="animations"
+            (select)="onSelect($event)" [xAxis]="barChart.showXAxis" [yAxis]="barChart.showYAxis"
+            [legend]="barChart.showLegend"
+            (window:resize)="onResize($event)">
+        </ngx-charts-bar-horizontal>
+    </div>
+
+    <div *ngIf="currentlySelectedChart=='tree-map'">
+        <ngx-charts-tree-map [view]="[chartWidth,chartHeight]" [results]="chartData" [gradient]="gradient" [animations]="animations"
+            (select)="onSelect($event)"
+            (window:resize)="onResize($event)">
+        </ngx-charts-tree-map>
+    </div>
+
+    <div *ngIf="currentlySelectedChart=='doughnut'">
+        <ngx-charts-advanced-pie-chart [view]="[chartWidth,chartHeight]" [results]="chartData" [gradient]="gradient"
+            [animations]="animations" (select)="onSelect($event)"
+            (window:resize)="onResize($event)">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+
+
+    
+
+
+    <app-chart-date-filter [handleFilterBtnClicked]="handleFilterBtnClicked" [filterDateValue]="filterDateValue"></app-chart-date-filter>
+
+
+</div>

@@ -1,0 +1,12 @@
+<div>
+    <p>start date</p>
+    <p-calendar [(ngModel)]="filterDateValue.startDate"></p-calendar>
+</div>
+<div>
+    <p>end date</p>
+    <p-calendar [(ngModel)]="filterDateValue.endDate"></p-calendar>
+</div>
+<div >
+    <p-button label="Filter" (onClick)="handleFilterBtnClicked()" [style]="{marginTop:'10px', width: '200px'}"></p-button>
+</div>
+    
